@@ -10,6 +10,9 @@ dependencies = []
 license = "MIT"
 license-files = ["LICENSE"]
 
+[tool.setuptools.package-data]
+"md2docx" = ["templates/*.docx"]
+
 [tool.ruff]
 line-length = 88
 target-version = "py314"
