@@ -10,6 +10,9 @@ dependencies = []
 license = "MIT"
 license-files = ["LICENSE"]
 
+[project.scripts]
+md2docx = "md2docx.cli:main"
+
 [tool.setuptools.package-data]
 "md2docx" = ["templates/*.docx"]
 
