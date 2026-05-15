@@ -1,3 +1,4 @@
+import subprocess
 import sys
 from argparse import ArgumentParser
 from pathlib import Path
@@ -40,6 +41,9 @@ def main() -> None:
             output_path=args.output,
             template_path=args.template,
         )
+    except subprocess.CalledProcessError:
+        # Pandoc has already written its error to stderr; just exit cleanly.
+        sys.exit(1)
     except Exception as e:
         print(f"md2docx: error: {e}", file=sys.stderr)
         sys.exit(1)
