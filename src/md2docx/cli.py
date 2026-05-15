@@ -41,6 +41,7 @@ def main() -> None:
         "--toc-depth",
         metavar="DEPTH",
         type=int,
+        choices=range(1, 7),
         default=3,
         help="depth of table of contents (default: 3)",
     )
