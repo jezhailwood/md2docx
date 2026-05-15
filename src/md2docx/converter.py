@@ -1,3 +1,8 @@
+"""Core conversion logic.
+
+Provides the `convert` function and its internal Pandoc helper.
+"""
+
 import subprocess
 from importlib.resources import as_file, files
 from pathlib import Path
@@ -10,6 +15,26 @@ def convert(
     toc: bool = False,
     toc_depth: int = 3,
 ) -> Path:
+    """Convert a Markdown file to a Word document.
+
+    Args:
+        input_path: Path to the source Markdown file.
+        output_path: Destination path for the generated .docx file. Defaults to the
+            input path with a .docx extension.
+        template_path: Path to a custom Word reference document. If omitted, the bundled
+            default template is used.
+        toc: Whether to include a table of contents.
+        toc_depth: Depth of the table of contents.
+
+    Returns:
+        The path to the generated .docx file.
+
+    Raises:
+        FileNotFoundError: If the input file or a supplied template cannot be found, or
+            if Pandoc is not installed.
+        NotADirectoryError: If the output directory does not exist.
+        subprocess.CalledProcessError: If Pandoc exits with a non-zero status.
+    """
     input_path = Path(input_path)
 
     if not input_path.exists():

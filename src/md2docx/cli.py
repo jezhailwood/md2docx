@@ -1,3 +1,15 @@
+"""Command-line interface.
+
+Wraps `md2docx.converter.convert` as a command-line tool. Accepts a Markdown file and
+optional output path, template and table-of-contents flags.
+
+Typical `md2docx` usage:
+
+    md2docx document.md
+    md2docx document.md -o report.docx --template custom.docx
+    md2docx document.md --toc --toc-depth 2
+"""
+
 import subprocess
 import sys
 from argparse import ArgumentParser
@@ -7,6 +19,7 @@ from md2docx.converter import convert
 
 
 def main() -> None:
+    """Run the md2docx command-line interface."""
     parser = ArgumentParser(
         prog="md2docx",
         description="Convert a Markdown file to a Word document",

@@ -1,0 +1,1 @@
+"""Word reference document templates."""
