@@ -32,14 +32,28 @@ def main() -> None:
         default=None,
         help="custom Word reference document (.docx)",
     )
+    parser.add_argument(
+        "--toc",
+        action="store_true",
+        help="include a table of contents",
+    )
+    parser.add_argument(
+        "--toc-depth",
+        metavar="DEPTH",
+        type=int,
+        default=3,
+        help="depth of table of contents (default: 3)",
+    )
 
     args = parser.parse_args()
 
     try:
         output_path = convert(
-            args.input,
+            input_path=args.input,
             output_path=args.output,
             template_path=args.template,
+            toc=args.toc,
+            toc_depth=args.toc_depth,
         )
     except subprocess.CalledProcessError:
         # Pandoc has already written its error to stderr; just exit cleanly.

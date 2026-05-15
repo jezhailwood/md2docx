@@ -7,6 +7,8 @@ def convert(
     input_path: str | Path,
     output_path: str | Path | None = None,
     template_path: str | Path | None = None,
+    toc: bool = False,
+    toc_depth: int = 3,
 ) -> Path:
     input_path = Path(input_path)
 
@@ -27,31 +29,38 @@ def convert(
         template_path = Path(template_path)
         if not template_path.exists():
             raise FileNotFoundError(f"template file not found: {template_path}")
-        _run_pandoc(input_path, output_path, template_path)
+        _run_pandoc(input_path, output_path, template_path, toc, toc_depth)
     else:
         with as_file(files("md2docx.templates").joinpath("default.docx")) as default:
-            _run_pandoc(input_path, output_path, default)
+            _run_pandoc(input_path, output_path, default, toc, toc_depth)
 
     return output_path
 
 
-def _run_pandoc(input_path: Path, output_path: Path, template_path: Path) -> None:
+def _run_pandoc(
+    input_path: Path,
+    output_path: Path,
+    template_path: Path,
+    toc: bool,
+    toc_depth: int,
+) -> None:
+    cmd = [
+        "pandoc",
+        str(input_path),
+        "-o",
+        str(output_path),
+        "-f",
+        "markdown",
+        "-t",
+        "docx",
+        "--reference-doc",
+        str(template_path),
+    ]
+    if toc:
+        cmd += ["--toc", f"--toc-depth={toc_depth}"]
+
     try:
-        subprocess.run(
-            [
-                "pandoc",
-                str(input_path),
-                "-o",
-                str(output_path),
-                "-f",
-                "markdown",
-                "-t",
-                "docx",
-                "--reference-doc",
-                str(template_path),
-            ],
-            check=True,
-        )
+        subprocess.run(cmd, check=True)
     except FileNotFoundError:
         raise FileNotFoundError(
             "pandoc is not installed or not on PATH — see https://pandoc.org"
