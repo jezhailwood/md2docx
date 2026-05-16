@@ -6,5 +6,3 @@ control styles and layout. The package installs an `md2docx` command;
 
 Run `md2docx --help` for usage, or see `md2docx.cli` for full option details.
 """
-
-from .converter import convert
