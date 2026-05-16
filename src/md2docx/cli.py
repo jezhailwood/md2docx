@@ -15,7 +15,7 @@ import sys
 from argparse import ArgumentParser
 from pathlib import Path
 
-from md2docx.converter import convert
+from .converter import convert
 
 
 def main() -> None:

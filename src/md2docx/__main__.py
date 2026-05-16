@@ -3,7 +3,7 @@
 Equivalent to running the `md2docx` script installed by the package.
 """
 
-from md2docx.cli import main
+from .cli import main
 
 if __name__ == "__main__":
     main()
