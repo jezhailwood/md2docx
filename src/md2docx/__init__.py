@@ -8,5 +8,3 @@ Run `md2docx --help` for usage, or see `md2docx.cli` for full option details.
 """
 
 from .converter import convert
-
-__all__ = ["convert"]
