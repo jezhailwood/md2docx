@@ -85,7 +85,7 @@ def _run_pandoc(
         cmd += ["--toc", f"--toc-depth={toc_depth}"]
 
     try:
-        subprocess.run(cmd, check=True)
+        subprocess.run(cmd, check=True, stderr=subprocess.PIPE)
     except FileNotFoundError:
         raise FileNotFoundError(
             "pandoc is not installed or not on PATH — see https://pandoc.org"

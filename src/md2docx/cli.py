@@ -69,8 +69,11 @@ def main() -> None:
             toc=args.toc,
             toc_depth=args.toc_depth,
         )
-    except subprocess.CalledProcessError:
-        # Pandoc has already written its error to stderr; just exit cleanly.
+    except subprocess.CalledProcessError as e:
+        print(
+            f"md2docx: pandoc error: {e.stderr.decode(errors='replace').strip()}",
+            file=sys.stderr,
+        )
         sys.exit(1)
     except Exception as e:
         print(f"md2docx: error: {e}", file=sys.stderr)
