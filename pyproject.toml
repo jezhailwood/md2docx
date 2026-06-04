@@ -5,10 +5,20 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "md2docx"
 version = "0.1.0"
+description = "A command-line tool for converting Markdown files to Word documents."
+readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
 license = "MIT"
 license-files = ["LICENSE"]
+authors = [
+    { name = "Jez Hailwood" },
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://jezhailwood.github.io/md2docx"
+Repository = "https://github.com/jezhailwood/md2docx"
+Issues = "https://github.com/jezhailwood/md2docx/issues"
 
 [project.scripts]
 md2docx = "md2docx.cli:main"
